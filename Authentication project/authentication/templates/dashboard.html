@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard · Member Pass</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --ink: #151B29;
+            --ink-deep: #0F1420;
+            --paper: #FBF7EF;
+            --brass: #B8935A;
+            --brass-light: #D8B87E;
+            --teal: #2F6F6B;
+            --text-dark: #1E2230;
+            --text-muted: #8B8577;
+            --line: rgba(21, 27, 41, 0.14);
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html,
+        body {
+            height: 100%;
+        }
+
+
+        body {
+
+            background:
+                radial-gradient(
+                    1200px 600px at 50% 0%,
+                    rgba(184, 147, 90, 0.10),
+                    transparent 60%
+                ),
+
+                radial-gradient(
+                    900px 500px at 100% 100%,
+                    rgba(47, 111, 107, 0.14),
+                    transparent 55%
+                ),
+
+                var(--ink-deep);
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 32px;
+
+            font-family: 'Inter', sans-serif;
+
+            color: var(--text-dark);
+        }
+
+
+        /* =========================
+           MAIN PASS
+        ========================= */
+
+        .pass {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 620px;
+
+            background: var(--paper);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 40px 80px -20px rgba(0, 0, 0, 0.55),
+                0 0 0 1px rgba(255, 255, 255, 0.03);
+
+            opacity: 0;
+
+            transform: translateY(14px) scale(.98);
+
+            animation:
+                rise 0.7s cubic-bezier(.2, .8, .2, 1)
+                forwards;
+        }
+
+
+        @keyframes rise {
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .head {
+
+            background:
+                repeating-linear-gradient(
+                    115deg,
+                    rgba(255, 255, 255, 0.025) 0 2px,
+                    transparent 2px 26px
+                ),
+
+                linear-gradient(
+                    175deg,
+                    #1B2334,
+                    var(--ink) 60%,
+                    #10151F
+                );
+
+            color: var(--paper);
+
+            padding: 30px 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .head .mark {
+
+            font-family: 'IBM Plex Mono', monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 0.22em;
+
+            color: var(--brass-light);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .mark::before {
+
+            content: "";
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #6FCF97;
+
+            box-shadow: 0 0 8px #6FCF97;
+
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .35;
+            }
+        }
+
+
+        .stamp {
+
+            font-family: 'IBM Plex Mono', monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 0.14em;
+
+            color: var(--brass-light);
+
+            border: 1.5px solid var(--brass-light);
+
+            padding: 5px 10px;
+
+            border-radius: 5px;
+
+            transform: rotate(3deg);
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        .body-content {
+
+            padding: 38px 34px 8px;
+        }
+
+
+        .eyebrow {
+
+            font-family: 'IBM Plex Mono', monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 0.2em;
+
+            color: var(--teal);
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+
+        h1.title {
+
+            font-family: 'Newsreader', serif;
+
+            font-style: italic;
+
+            font-weight: 500;
+
+            font-size: 38px;
+
+            line-height: 1.15;
+
+            margin-bottom: 10px;
+        }
+
+
+        .sub {
+
+            color: var(--text-muted);
+
+            font-size: 14.5px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           USER DETAILS
+        ========================= */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px 28px;
+
+            padding-bottom: 28px;
+
+            border-bottom: 1.5px solid var(--line);
+
+            margin-bottom: 26px;
+        }
+
+
+        .grid div label {
+
+            display: block;
+
+            font-family: 'IBM Plex Mono', monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 0.14em;
+
+            text-transform: uppercase;
+
+            color: var(--text-muted);
+
+            margin-bottom: 6px;
+        }
+
+
+        .grid div span {
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            color: var(--text-dark);
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           ACTION BUTTONS
+        ========================= */
+
+        .actions {
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 0 34px 32px;
+        }
+
+
+        .btn {
+
+            flex: 1;
+
+            text-align: center;
+
+            padding: 13px 18px;
+
+            border-radius: 8px;
+
+            font-family: 'IBM Plex Mono', monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 0.14em;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition:
+                transform .18s ease,
+                background .2s ease,
+                color .2s ease;
+
+            border: 1.5px solid transparent;
+        }
+
+
+        /* Logout */
+
+        .btn-ghost {
+
+            background: transparent;
+
+            color: var(--text-dark);
+
+            border-color: var(--line);
+        }
+
+
+        .btn-ghost:hover {
+
+            border-color: var(--text-dark);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* Profile */
+
+        .btn-primary {
+
+            background: var(--brass);
+
+            color: var(--ink-deep);
+
+            box-shadow:
+                0 10px 24px -10px
+                rgba(184, 147, 90, 0.6);
+        }
+
+
+        .btn-primary:hover {
+
+            background: var(--brass-light);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           PERFORATION
+        ========================= */
+
+        .perf-h {
+
+            position: relative;
+
+            height: 0;
+
+            border-top:
+                1.5px dashed
+                rgba(21, 27, 41, 0.28);
+
+            margin: 0 34px;
+        }
+
+
+        .perf-h::before,
+        .perf-h::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: -9px;
+
+            width: 18px;
+
+            height: 18px;
+
+            background: var(--ink-deep);
+
+            border-radius: 50%;
+        }
+
+
+        .perf-h::before {
+
+            left: -9px;
+        }
+
+
+        .perf-h::after {
+
+            right: -9px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer-strip {
+
+            padding: 24px 34px 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 18px;
+        }
+
+
+        .barcode {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 2px;
+
+            height: 34px;
+        }
+
+
+        .barcode i {
+
+            display: block;
+
+            width: 3px;
+
+            background: var(--text-dark);
+
+            border-radius: 1px;
+
+            opacity: .7;
+        }
+
+
+        .ref {
+
+            font-family: 'IBM Plex Mono', monospace;
+
+            font-size: 10.5px;
+
+            letter-spacing: 0.1em;
+
+            color: var(--text-muted);
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 560px) {
+
+            body {
+                padding: 18px;
+            }
+
+
+            .head {
+                padding: 24px;
+            }
+
+
+            .body-content {
+                padding: 30px 24px 8px;
+            }
+
+
+            .grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+
+            .actions {
+
+                flex-direction: column;
+
+                padding: 0 24px 28px;
+            }
+
+
+            .perf-h {
+                margin: 0 24px;
+            }
+
+
+            .footer-strip {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                padding: 24px;
+            }
+
+
+            h1.title {
+                font-size: 32px;
+            }
+
+
+            .stamp {
+                font-size: 9px;
+            }
+        }
+
+
+        /* =========================
+           ACCESSIBILITY
+        ========================= */
+
+        :focus-visible {
+
+            outline: 2px solid var(--teal);
+
+            outline-offset: 3px;
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .pass {
+
+                animation: none;
+
+                opacity: 1;
+
+                transform: none;
+            }
+
+
+            .mark::before {
+
+                animation: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         MEMBER PASS
+    ================================== -->
+
+    <div class="pass">
+
+
+        <!-- =================================
+             HEADER
+        ================================== -->
+
+        <div class="head">
+
+            <div class="mark">
+                SESSION ACTIVE
+            </div>
+
+            <div class="stamp">
+                ✓ ACCESS GRANTED
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             USER INFORMATION
+        ================================== -->
+
+        <div class="body-content">
+
+
+            <div class="eyebrow">
+                Dashboard · Gate 03
+            </div>
+
+
+            <!-- Username from MySQL -->
+
+            <h1 class="title">
+                Welcome back, {{ user.username }}.
+            </h1>
+
+
+            <p class="sub">
+                You're checked in. Here's your current pass summary.
+            </p>
+
+
+            <div class="grid">
+
+
+                <!-- USERNAME -->
+
+                <div>
+
+                    <label>
+                        Passenger
+                    </label>
+
+                    <span>
+                        {{ user.username }}
+                    </span>
+
+                </div>
+
+
+                <!-- LOGIN STATUS -->
+
+                <div>
+
+                    <label>
+                        Status
+                    </label>
+
+                    <span style="color:var(--teal)">
+                        Logged in
+                    </span>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div>
+
+                    <label>
+                        Email
+                    </label>
+
+                    <span>
+                        {{ user.email }}
+                    </span>
+
+                </div>
+
+
+                <!-- USER ID -->
+
+                <div>
+
+                    <label>
+                        User ID
+                    </label>
+
+                    <span>
+                        #{{ user.id }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             ACTIONS
+        ================================== -->
+
+        <div class="actions">
+
+
+            <!-- Logout -->
+
+            <a
+                href="/logout"
+                class="btn btn-ghost"
+            >
+                Logout
+            </a>
+
+
+            <!-- Profile -->
+
+            <a
+                href="/profile"
+                class="btn btn-primary"
+            >
+                View profile →
+            </a>
+
+
+        </div>
+
+
+        <!-- =================================
+             PERFORATION
+        ================================== -->
+
+        <div class="perf-h"></div>
+
+
+        <!-- =================================
+             FOOTER
+        ================================== -->
+
+        <div class="footer-strip">
+
+
+            <!-- Barcode -->
+
+            <div
+                class="barcode"
+                id="barcode"
+                aria-label="Member reference barcode"
+            ></div>
+
+
+            <!-- Reference -->
+
+            <div class="ref">
+
+                REF ·
+
+                <span id="ref">
+                    A1B2-C3D4
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+
+        /* =========================
+           GENERATE BARCODE
+        ========================= */
+
+        const barcode =
+            document.getElementById("barcode");
+
+
+        const widths = [
+            4, 3, 7, 3, 3, 5,
+            3, 8, 3, 4, 3, 6,
+            3, 3, 9, 3, 4, 3,
+            7, 3, 3, 5, 3, 4
+        ];
+
+
+        widths.forEach(width => {
+
+            const bar =
+                document.createElement("i");
+
+
+            bar.style.height =
+                (12 + width * 2.2) + "px";
+
+
+            bar.style.opacity =
+                0.4 + Math.random() * 0.5;
+
+
+            barcode.appendChild(bar);
+
+        });
+
+
+        /* =========================
+           SESSION TIME
+        ========================= */
+
+        /*
+            This is browser time.
+            Later we can store the actual
+            login time in MySQL.
+        */
+
+        const currentTime =
+            new Date().toLocaleString(
+                undefined,
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    month: "short",
+                    day: "numeric"
+                }
+            );
+
+
+        /*
+            We don't currently have a
+            sessionTime element because
+            user data is coming from backend.
+
+            This can be added later.
+        */
+
+
+        /* =========================
+           REFERENCE NUMBER
+        ========================= */
+
+        const reference =
+            Math.random()
+                .toString(36)
+                .slice(2, 6)
+                .toUpperCase()
+            + "-"
+            +
+            Math.random()
+                .toString(36)
+                .slice(2, 6)
+                .toUpperCase();
+
+
+        document.getElementById("ref")
+            .textContent = reference;
+
+
+    </script>
+
+
+</body>
+
+</html>

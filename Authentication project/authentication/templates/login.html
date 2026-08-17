@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In · Member Pass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151B29;
+    --ink-deep:#0F1420;
+    --paper:#FBF7EF;
+    --paper-dim:#F1EAD9;
+    --brass:#B8935A;
+    --brass-light:#D8B87E;
+    --teal:#2F6F6B;
+    --rust:#B4482F;
+    --text-dark:#1E2230;
+    --text-muted:#8B8577;
+    --line: rgba(21,27,41,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% 0%, rgba(184,147,90,0.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 100%, rgba(47,111,107,0.14), transparent 55%),
+      var(--ink-deep);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    font-family:'Inter', sans-serif;
+    color:var(--text-dark);
+  }
+  .pass{
+    display:flex;
+    width:100%;
+    max-width:900px;
+    min-height:520px;
+    background:var(--paper);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03);
+    opacity:0;
+    transform:translateY(14px);
+    animation: rise 0.7s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
+
+  /* STUB */
+  .stub{
+    position:relative;
+    width:260px;
+    flex-shrink:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 26px),
+      linear-gradient(175deg, #1B2334, var(--ink) 60%, #10151F);
+    color:var(--paper);
+    padding:34px 26px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .stub-top .mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.22em;
+    color:var(--brass-light);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .mark::before{
+    content:"";
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--brass-light);
+    box-shadow:0 0 8px var(--brass-light);
+  }
+  .stub-top h1{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:30px;
+    line-height:1.15;
+    margin-top:18px;
+    color:var(--paper);
+  }
+  .stub-mid{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    color:rgba(251,247,239,0.55);
+    line-height:1.9;
+    text-transform:uppercase;
+  }
+  .stub-mid span{ color:var(--brass-light); }
+  .barcode{
+    display:flex;
+    align-items:flex-end;
+    gap:2px;
+    height:36px;
+    margin-top:16px;
+  }
+  .barcode i{
+    display:block;
+    width:3px;
+    background:rgba(251,247,239,0.5);
+    border-radius:1px;
+  }
+
+  /* PERFORATION */
+  .perf{
+    position:relative;
+    width:0;
+    border-left:1.5px dashed rgba(21,27,41,0.28);
+  }
+  .perf::before,.perf::after{
+    content:"";
+    position:absolute;
+    left:-9px;
+    width:18px;height:18px;
+    background:var(--ink-deep);
+    border-radius:50%;
+  }
+  .perf::before{ top:-9px; }
+  .perf::after{ bottom:-9px; }
+
+  /* FORM */
+  .form-side{
+    flex:1;
+    padding:44px 48px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:var(--teal);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .form-side h2{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:34px;
+    margin-bottom:6px;
+    color:var(--text-dark);
+  }
+  .sub{
+    color:var(--text-muted);
+    font-size:14.5px;
+    margin-bottom:32px;
+  }
+  .field{ margin-bottom:24px; position:relative; }
+  .field label{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-bottom:8px;
+  }
+  .field input{
+    width:100%;
+    border:none;
+    border-bottom:1.5px solid var(--line);
+    background:transparent;
+    padding:8px 2px 10px;
+    font-family:'Inter', sans-serif;
+    font-size:15.5px;
+    color:var(--text-dark);
+    outline:none;
+    transition:border-color .25s ease;
+  }
+  .field input::placeholder{ color:#C4BEAE; }
+  .field input:focus{ border-bottom-color:var(--brass); }
+  .field .bar{
+    position:absolute; left:0; bottom:0; height:1.5px; width:0;
+    background:var(--brass);
+    transition:width .3s ease;
+  }
+  .field input:focus ~ .bar{ width:100%; }
+
+  .row-between{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:-8px; margin-bottom:26px;
+  }
+  .remember{
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; color:var(--text-muted);
+  }
+  .remember input{ accent-color:var(--brass); width:14px; height:14px; }
+  .forgot{
+    font-size:13px; color:var(--teal); text-decoration:none; font-weight:500;
+  }
+  .forgot:hover{ text-decoration:underline; }
+
+  button.cta{
+    appearance:none; border:none; cursor:pointer;
+    width:100%;
+    padding:14px 20px;
+    background:var(--brass);
+    color:var(--ink-deep);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    border-radius:8px;
+    transition:transform .18s ease, box-shadow .18s ease, background .2s ease;
+    box-shadow:0 10px 24px -10px rgba(184,147,90,0.6);
+  }
+  button.cta:hover{ transform:translateY(-2px); background:var(--brass-light); }
+  button.cta:active{ transform:translateY(0); }
+
+  .foot{
+    margin-top:26px;
+    font-size:13.5px;
+    color:var(--text-muted);
+    text-align:center;
+  }
+  .foot a{ color:var(--text-dark); font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--brass); }
+  .foot a:hover{ color:var(--teal); border-color:var(--teal); }
+
+  @media (max-width:680px){
+    .pass{ flex-direction:column; }
+    .stub{ width:100%; flex-direction:row; align-items:center; justify-content:space-between; padding:22px 24px;}
+    .stub-top h1{ font-size:22px; margin-top:6px;}
+    .stub-mid, .barcode{ display:none; }
+    .perf{ display:none; }
+    .form-side{ padding:32px 26px; }
+  }
+
+  :focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){
+    .pass{ animation:none; opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="pass">
+    <div class="stub">
+      <div class="stub-top">
+        <div class="mark">MEMBER PASS</div>
+        <h1>Welcome<br>back.</h1>
+      </div>
+      <div>
+        <div class="stub-mid">
+          Gate <span>01 · LOGIN</span><br>
+          Class <span>STANDARD</span><br>
+          Valid <span>THIS SESSION</span>
+        </div>
+        <div class="barcode" id="barcode"></div>
+      </div>
+    </div>
+
+    <div class="perf"></div>
+
+    <div class="form-side">
+      <div class="eyebrow">Access · Sign in</div>
+      <h2>Enter your pass</h2>
+      <p class="sub">Sign in with the email and password on file.</p>
+
+      <form method="POST" action="/login">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          <div class="bar"></div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
+          <div class="bar"></div>
+        </div>
+
+        <div class="row-between">
+          <label class="remember">
+            <input type="checkbox" name="remember">
+            Keep me signed in
+          </label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="cta">Sign in →</button>
+      </form>
+
+      <p class="foot">Don't have a pass yet? <a href="/register">Register</a></p>
+    </div>
+  </div>
+
+<script>
+  // build a barcode-esque pattern for the stub
+  const bc = document.getElementById('barcode');
+  const widths = [3,5,3,8,3,3,6,3,4,9,3,5,3,3,7,3,4,3,8,3];
+  widths.forEach(w=>{
+    const bar = document.createElement('i');
+    bar.style.height = (14 + w*2.4) + 'px';
+    bar.style.opacity = 0.35 + Math.random()*0.5;
+    bc.appendChild(bar);
+  });
+</script>
+</body>
+</html>
