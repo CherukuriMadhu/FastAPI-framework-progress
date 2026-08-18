@@ -1,0 +1,26 @@
+pip install -r requirements.txt
+myenv\Scripts\activate // runs vertual environment
+uvicorn main:app --reload
+
+============
+allows different software to communicate and share data
+acts as a MESSENGER between two applications 
+
+GET:-- GET DATA JUST GET DATA AND HOLD
+POST:-- SEND NEW DATA
+PUT/PATCH:-- UPDATE DATA
+DELETE:-- REMOVE DATA
+
+========================
+
+step1: creating a venv file
+step2: creating a UV python package and project manager
+	install UV : powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex
+	
+	 add in local env variables: $env:Path = "C:\Users\cheru\.local\bin;$env:Path"
+	check uv installed or not: uv --version
+	
+	creating fastapi in uv project folder: uv add "fastapi[standard]"
+step3 : 
+	Run fastapi ---- fastapi dev main.py
+ 

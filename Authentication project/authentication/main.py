@@ -58,8 +58,6 @@ def register_page(request: Request):
         name="register.html",
         context={}
     )
-
-
 # -------------------------
 # REGISTER USER
 # -------------------------
