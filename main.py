@@ -6,7 +6,7 @@ app = FastAPI() # creating a fastapi instance application
 # "/" is the path of the endpoint
 @app.get("/") # this is an api endpoint that will be called when the user visits the root URL   
 def read_root():
-    return {"My name is Madhu cherukuri": "I am a final year student"} # this is the response that will be returned when the user visits the root URL    
+    return {"My name is Madhu cherukuri": "I am a Final year student get endpoint"} # this is the response that will be returned when the user visits the root URL    
 
 @app.get("/madhu") # this is an api endpoint that will be called when the user visits the /madhu URL
 def read_root():

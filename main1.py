@@ -12,7 +12,7 @@ app = FastAPI()
 def read_root():
     return {
         "My name is Madhu Cherukuri":
-        "I am a final year student"
+        "I am a Final year student. This is Get API endpoint"
     }
 
 
