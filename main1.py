@@ -29,7 +29,7 @@ class Pizza(BaseModel):
 # In-memory database
 # -----------------------------
 
-pizzas = [
+pizzas = [ 
     {
         "id": 1,
         "pizza": "margherita",
@@ -46,7 +46,7 @@ pizzas = [
 # -----------------------------
 # CREATE - POST
 # -----------------------------
-
+ 
 @app.post("/pizzas")
 def create_pizza(pizza: Pizza):
 
