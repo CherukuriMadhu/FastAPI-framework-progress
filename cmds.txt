@@ -22,5 +22,5 @@ step2: creating a UV python package and project manager
 	
 	creating fastapi in uv project folder: uv add "fastapi[standard]"
 step3 : 
-	Run fastapi ---- fastapi dev main.py
+	Run fastapi --- fastapi dev main.py
  
